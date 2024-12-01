@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "listedependance.h"
+#include "Affichagegeneral.h"
 
 #define MAX_ANIMAUX 100
 #define MAX_NOM 50
@@ -31,25 +33,6 @@ void lire_fichier(char* nomFichier, char noms[MAX_ANIMAUX][MAX_NOM], int matrice
     fclose(fichier);
 }
 
-// Fonction pour afficher les successeurs de chaque animal
-void afficher_successeurs(char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre) {
-    for (int i = 0; i < ordre; i++) {
-        printf("Successeurs de %s : ", noms[i]);
-        int successeur_existe = 0;
-
-        for (int j = 0; j < ordre; j++) {
-            if (matrice[i][j] == 1) {
-                printf("%s ", noms[j]);
-                successeur_existe = 1;
-            }
-        }
-
-        if (!successeur_existe) {
-            printf("Aucun");
-        }
-        printf("\n");
-    }
-}
 
 int main() {
     char nomFichier[100];
@@ -64,9 +47,28 @@ int main() {
     // Lire le fichier et charger les données
     lire_fichier(nomFichier, noms, matrice, &ordre);
 
-    // Afficher les successeurs pour chaque animal
-    printf("\nAffichage des successeurs :\n");
+    // Afficher les sommets
+    afficher_sommets(noms, ordre);
+
+    // Afficher les arcs
+    afficher_arcs(noms, matrice, ordre);
+
+    // Afficher les successeurs
     afficher_successeurs(noms, matrice, ordre);
+
+    // Afficher les prédécesseurs
+    afficher_predecesseurs(noms, matrice, ordre);
+
+    // Trouver les premiers maillons
+    trouver_premiers_maillons(noms, matrice, ordre);
+
+    // Trouver les derniers maillons
+    trouver_derniers_maillons(noms, matrice, ordre);
+
+    // Trouver et afficher les chemins dépendants d'un sommet
+    trouver_chemins_dependance(noms, matrice, ordre);
+
+
 
     return 0;
 }
