@@ -15,3 +15,4 @@ void afficher_niveau_trophique_maximal(int niveaux[MAX_ANIMAUX], int ordre);
 
 
 #endif //PROJET_INFO_TG_NIVTROPHIQUESMAXLIM_H
+

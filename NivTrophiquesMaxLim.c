@@ -69,3 +69,4 @@ void afficher_niveau_trophique_maximal(int niveaux[MAX_ANIMAUX], int ordre) {
     }
     printf("\nLe niveau trophique maximal dans le reseau est : %d\n", niveau_max);
 }
+
