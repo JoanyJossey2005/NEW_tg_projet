@@ -3,6 +3,7 @@
 #include <string.h>
 #include "listedependance.h"
 #include "Affichagegeneral.h"
+#include "connexite.h"
 
 #define MAX_ANIMAUX 100
 #define MAX_NOM 50
@@ -32,6 +33,8 @@ void afficher_menu_secondaire() {
     printf("11. Simuler les flux\n");
     printf("12. Analyser la dynamique des populations\n");
     printf("13. Liste des dependances d'un sommet\n");
+    printf("14. Verifier la connexite du graphe\n");
+
     printf("0. Retour au menu principal\n");
 }
 
@@ -160,6 +163,16 @@ int main() {
                     // dependance d'un chemin
                     trouver_chemins_dependance(noms, matrice, ordre);
                     break;
+                case 14:
+                    if (est_fortement_connexe(matrice, ordre)) {
+                        printf("Le graphe est fortement connexe.\n");
+                    } else if (est_connexe(matrice, ordre)) {
+                        printf("Le graphe est connexe.\n");
+                    } else {
+                        printf("Le graphe n'est pas connexe.\n");
+                    }
+                    break;
+
                 default:
                     printf("Choix invalide. Veuillez reessayer.\n");
             }

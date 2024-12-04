@@ -86,3 +86,4 @@ bool est_connexe(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre) {
 
     return true; // Faiblement connexe
 }
+

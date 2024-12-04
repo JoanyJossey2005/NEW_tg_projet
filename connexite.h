@@ -13,3 +13,4 @@ bool est_fortement_connexe(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre);
 bool est_connexe(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre);
 
 #endif //PROJET_INFO_TG_CONNEXITE_H
+
