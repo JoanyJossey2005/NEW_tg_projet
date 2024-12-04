@@ -8,4 +8,6 @@ add_executable(projet_info_TG main.c
         listedependance.c
         listedependance.h
         connexite.c
-        connexite.h)
+        connexite.h
+        centralite.c
+        centralite.h)

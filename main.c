@@ -4,6 +4,7 @@
 #include "listedependance.h"
 #include "Affichagegeneral.h"
 #include "connexite.h"
+#include "centralite.h"
 
 #define MAX_ANIMAUX 100
 #define MAX_NOM 50
@@ -26,7 +27,7 @@ void afficher_menu_secondaire() {
     printf("4. Afficher les predecesseurs\n");
     printf("5. Trouver les premiers maillons\n");
     printf("6. Trouver les derniers maillons\n");
-    printf("7. Mesurer la centralite radiale\n");
+    printf("7. Mesurer la centralite radiale et mediane\n");
     printf("8. Calculer les niveaux trophiques\n");
     printf("9. Simuler la disparition d'une espece\n");
     printf("10. Visualiser le graphe\n");
@@ -136,8 +137,8 @@ int main() {
                     trouver_derniers_maillons(noms, matrice, ordre);
                     break;
                 case 7:
-                  //  mesurer_centralite_radiale(noms, matrice, ordre);
-                  printf("\n pas encore implemente");
+                    mesurer_centralite_radiale(matrice, ordre, noms);
+                    mesurer_centralite_mediane(matrice, ordre, noms);
                     break;
                 case 8:
                    // calculer_niveaux_trophiques(noms, matrice, ordre);
