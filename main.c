@@ -5,6 +5,7 @@
 #include "Affichagegeneral.h"
 #include "connexite.h"
 #include "centralite.h"
+#include "NivTrophiquesMaxLim.h"
 
 #define MAX_ANIMAUX 100
 #define MAX_NOM 50
@@ -74,6 +75,7 @@ int main() {
     char nomFichier[100];
     int matrice[MAX_ANIMAUX][MAX_ANIMAUX];
     char noms[MAX_ANIMAUX][MAX_NOM];
+    int niveaux[MAX_ANIMAUX];
     int ordre = 0;
     int choixGraphe, choixFonctionnalite;
 
@@ -141,9 +143,12 @@ int main() {
                     mesurer_centralite_mediane(matrice, ordre, noms);
                     break;
                 case 8:
-                   // calculer_niveaux_trophiques(noms, matrice, ordre);
-                    printf("\n pas encore implemente");
-                    break;
+                    // Calculer les niveaux trophiques
+                    calculer_niveaux_trophiques(matrice, ordre, niveaux);
+                    // Afficher les niveaux trophiques de toutes les espèces
+                    afficher_niveaux_trophiques(noms, niveaux, ordre);
+                    // Afficher le niveau trophique maximal
+                    afficher_niveau_trophique_maximal(niveaux, ordre);
                 case 9:
                    // simuler_disparition_espece(noms, matrice, ordre);
                     printf("\n pas encore implemente");

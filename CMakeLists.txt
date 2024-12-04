@@ -10,4 +10,6 @@ add_executable(projet_info_TG main.c
         connexite.c
         connexite.h
         centralite.c
-        centralite.h)
+        centralite.h
+        NivTrophiquesMaxLim.c
+        NivTrophiquesMaxLim.h)
