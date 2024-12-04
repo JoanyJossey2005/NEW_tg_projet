@@ -10,6 +10,7 @@
 
 
 void afficher_sommets(char noms[MAX_ANIMAUX][MAX_NOM], int ordre) {
+    printf("Nombre de sommet : %d  :\n", ordre);
     printf("Liste des sommets :\n");
     for (int i = 0; i < ordre; i++) {
         printf("%s\n", noms[i]);
@@ -17,7 +18,19 @@ void afficher_sommets(char noms[MAX_ANIMAUX][MAX_NOM], int ordre) {
 }
 
 void afficher_arcs(char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre) {
-    printf("\nListe des arcs :\n");
+    int nb_arcs = 0;
+
+    // Calcul du nombre d'arcs
+    for (int i = 0; i < ordre; i++) {
+        for (int j = 0; j < ordre; j++) {
+            if (matrice[i][j] == 1) {
+                nb_arcs++;
+            }
+        }
+    }
+
+    printf("\nNombre des arc %d  :\n", nb_arcs);
+    printf("\nListe des arcs:\n");
     for (int i = 0; i < ordre; i++) {
         for (int j = 0; j < ordre; j++) {
             if (matrice[i][j] == 1) {

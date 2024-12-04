@@ -31,6 +31,7 @@ void afficher_menu_secondaire() {
     printf("10. Visualiser le graphe\n");
     printf("11. Simuler les flux\n");
     printf("12. Analyser la dynamique des populations\n");
+    printf("13. Liste des dependances d'un sommet\n");
     printf("0. Retour au menu principal\n");
 }
 
@@ -154,6 +155,10 @@ int main() {
                 case 12:
                    // evolution_dynamique_population(noms, matrice, ordre);
                     printf("\n pas encore implemente");
+                    break;
+                case 13:
+                    // dependance d'un chemin
+                    trouver_chemins_dependance(noms, matrice, ordre);
                     break;
                 default:
                     printf("Choix invalide. Veuillez reessayer.\n");
