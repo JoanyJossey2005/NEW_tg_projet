@@ -3,6 +3,7 @@
 #include <string.h>
 #include "listedependance.h"
 #include "Affichagegeneral.h"
+#include "disparition_espece.h"
 #include "connexite.h"
 #include "centralite.h"
 #include "NivTrophiquesMaxLim.h"
@@ -78,6 +79,7 @@ int main() {
     int niveaux[MAX_ANIMAUX];
     int ordre = 0;
     int choixGraphe, choixFonctionnalite;
+    int sommetSupprime;
 
     while (1) {
         afficher_menu_principal();
@@ -150,8 +152,14 @@ int main() {
                     // Afficher le niveau trophique maximal
                     afficher_niveau_trophique_maximal(niveaux, ordre);
                 case 9:
-                   // simuler_disparition_espece(noms, matrice, ordre);
-                    printf("\n pas encore implemente");
+                    // Demander le sommet à supprimer
+                    printf("Entrez le numéro du sommet a supprimer (0 à %d) : ", ordre - 1);
+                    scanf("%d", &sommetSupprime);
+
+                    // Analyser et afficher l'impact
+                    Impact impact;
+                    analyserImpact(matrice, ordre, sommetSupprime, &impact);
+                    afficherImpact(&impact, noms);
                     break;
                 case 10:
                    // visualisation_graphique(noms, matrice, ordre);

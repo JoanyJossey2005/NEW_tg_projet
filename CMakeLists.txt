@@ -7,6 +7,9 @@ add_executable(projet_info_TG main.c
         Affichagegeneral.c
         listedependance.c
         listedependance.h
+        disparition_espece.h
+        disparition_espece.c
+        listedependance.h
         connexite.c
         connexite.h
         centralite.c
