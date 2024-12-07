@@ -105,3 +105,4 @@ void lancer_simulation(int ordre, float* populations, float* r, float* K, int ma
         sleep(1); // Simulation temps réel (modifiable)
     }
 }
+
