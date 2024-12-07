@@ -1,20 +1,21 @@
 16
-herbe
-lapin 
-souris
-sauterelle
-renard
-hibou
-faucon
-belette
-grenouille
-loup
-cerf
-escargot
-chouette 
-ecureuil
-vipere
-blaireau
+herbe 1000
+lapin 150
+souris 200
+sauterelle 300
+renard 50
+hibou 30
+faucon 20
+belette 60
+grenouille 150
+loup 10 
+cerf 50 
+escargot 300
+chouette 20
+ecureuil 80 
+vipere 20
+blaireau 30
+
 0 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0
 0 0 0 0 1 0 1 0 0 1 0 0 0 0 0 0
 0 0 0 0 1 1 1 1 0 0 0 0 1 0 1 1

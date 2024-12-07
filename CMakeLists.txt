@@ -15,5 +15,7 @@ add_executable(projet_info_TG main.c
         centralite.c
         centralite.h
         NivTrophiquesMaxLim.c
-        NivTrophiquesMaxLim.h)
+        NivTrophiquesMaxLim.h
+        dynamique.c
+        dynamique.h)
 

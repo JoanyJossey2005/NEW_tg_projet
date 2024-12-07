@@ -7,6 +7,7 @@
 #include "connexite.h"
 #include "centralite.h"
 #include "NivTrophiquesMaxLim.h"
+#include "dynamique.h"
 
 #define MAX_ANIMAUX 100
 #define MAX_NOM 50
@@ -41,8 +42,9 @@ void afficher_menu_secondaire() {
     printf("0. Retour au menu principal\n");
 }
 
-// Fonction pour lire le fichier et extraire les données
-void lire_fichier(char* nomFichier, char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int* ordre) {
+// Fonction pour lire les données d'un fichier et remplir les structures associées
+void lire_fichier(char* nomFichier, char noms[MAX_ANIMAUX][MAX_NOM],
+                  float populations[MAX_ANIMAUX], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int* ordre) {
     FILE* fichier = fopen(nomFichier, "r");
     if (!fichier) {
         perror("Erreur lors de l'ouverture du fichier");
@@ -52,9 +54,9 @@ void lire_fichier(char* nomFichier, char noms[MAX_ANIMAUX][MAX_NOM], int matrice
     // Lire l'ordre (nombre de sommets/animaux)
     fscanf(fichier, "%d", ordre);
 
-    // Lire les noms des animaux
+    // Lire les noms des animaux et leurs populations
     for (int i = 0; i < *ordre; i++) {
-        fscanf(fichier, "%s", noms[i]);
+        fscanf(fichier, "%s %f", noms[i], &populations[i]);
     }
 
     // Lire la matrice d'adjacence
@@ -67,9 +69,10 @@ void lire_fichier(char* nomFichier, char noms[MAX_ANIMAUX][MAX_NOM], int matrice
     fclose(fichier);
 }
 
-// Charger le graphe depuis un fichier
-void charger_graphe(char* nomFichier, char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int* ordre) {
-    lire_fichier(nomFichier, noms, matrice, ordre);
+// Fonction pour charger le graphe depuis un fichier
+void charger_graphe(char* nomFichier, char noms[MAX_ANIMAUX][MAX_NOM],
+                    float populations[MAX_ANIMAUX], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int* ordre) {
+    lire_fichier(nomFichier, noms, populations, matrice, ordre);
 }
 
 int main() {
@@ -77,6 +80,9 @@ int main() {
     int matrice[MAX_ANIMAUX][MAX_ANIMAUX];
     char noms[MAX_ANIMAUX][MAX_NOM];
     int niveaux[MAX_ANIMAUX];
+    float populations[MAX_ANIMAUX];  // Déclaration des populations
+    float r[MAX_ANIMAUX];            // Déclaration des taux de croissance
+    float K[MAX_ANIMAUX];            // Déclaration des capacités de charge
     int ordre = 0;
     int choixGraphe, choixFonctionnalite;
     int sommetSupprime;
@@ -107,13 +113,15 @@ int main() {
                 continue;
         }
 
-        charger_graphe(nomFichier, noms, matrice, &ordre);
+        charger_graphe(nomFichier, noms, populations, matrice, &ordre);
         printf("Graphe %d chargé avec succès.\n", choixGraphe);
+
+        initialiser_parametres_dynamiques(r, K, ordre, noms);
 
         // Afficher le menu secondaire pour les fonctionnalités
         while (1) {
             afficher_menu_secondaire();
-            printf("Choisissez une fonctionnalite (1-12, ou 0 pour revenir au menu principal) : ");
+            printf("Choisissez une fonctionnalite (1-14, ou 0 pour revenir au menu principal) : ");
             scanf("%d", &choixFonctionnalite);
 
             if (choixFonctionnalite == 0) {
@@ -145,33 +153,35 @@ int main() {
                     mesurer_centralite_mediane(matrice, ordre, noms);
                     break;
                 case 8:
-                    // Calculer les niveaux trophiques
                     calculer_niveaux_trophiques(matrice, ordre, niveaux);
-                    // Afficher les niveaux trophiques de toutes les espèces
                     afficher_niveaux_trophiques(noms, niveaux, ordre);
-                    // Afficher le niveau trophique maximal
                     afficher_niveau_trophique_maximal(niveaux, ordre);
+                    break;
                 case 9:
-                    // Demander le sommet à supprimer
-                    printf("Entrez le numéro du sommet a supprimer (0 à %d) : ", ordre - 1);
+                    printf("Entrez le numero du sommet a supprimer (0 à %d) : ", ordre - 1);
                     scanf("%d", &sommetSupprime);
-
-                    // Analyser et afficher l'impact
                     Impact impact;
                     analyserImpact(matrice, ordre, sommetSupprime, &impact);
                     afficherImpact(&impact, noms);
                     break;
                 case 10:
-                   // visualisation_graphique(noms, matrice, ordre);
-                    printf("\n pas encore implemente");
+                    printf("\nVisualisation non implementee\n");
                     break;
                 case 11:
-                   // moteur_simulation_flux(noms, matrice, ordre);
-                    printf("\n pas encore implemente");
+                    printf("\nSimulation de flux non implementee\n");
                     break;
                 case 12:
-                   // evolution_dynamique_population(noms, matrice, ordre);
-                    printf("\n pas encore implemente");
+                    printf("\n=== Simulation Dynamique en Temps Reel ===\n");
+                    printf("Les populations actuelles seront mises a jour selon le modèle logistique.\n");
+                    printf("Vous pouvez interagir avec la simulation en temps reel.\n");
+
+                    // Initialisation des paramètres dynamiques
+                    initialiser_parametres_dynamiques(r, K, ordre, noms);
+
+                    // Lancement de la simulation
+                    lancer_simulation(ordre, populations, r, K, matrice, noms);
+
+                    printf("Simulation terminee. Retour au menu principal.\n");
                     break;
                 case 13:
                     // dependance d'un chemin
