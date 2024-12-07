@@ -8,6 +8,7 @@
 #include "centralite.h"
 #include "NivTrophiquesMaxLim.h"
 #include "DynamiquePopulation.h"
+#include "visualisation_graphes.h"
 
 #define MAX_ANIMAUX 100
 #define MAX_NOM 50
@@ -108,6 +109,10 @@ int main() {
     double coefficients[MAX_ANIMAUX][MAX_ANIMAUX];
     char NomAnimaux[MAX_ANIMAUX][20];
 
+    const char *imagePath = "C:\\Melanie\\Informatique\\NEW_tg_projet\\cmake-build-debug\\graphe_1.png";
+   // const char* fichierDot = "C:\\Melanie\\Informatique\\NEW_tg_projet\\cmake-build-debug\\graphe_1.dot";
+   // const char* fichierImage = "C:\\Melanie\\Informatique\\NEW_tg_projet\\cmake-build-debug\\graphe_1.png";
+
     while (1) {
         afficher_menu_principal();
         printf("Choisissez un graphe a etudier (1, 2 ou 3, ou 0 pour quitter) : ");
@@ -122,12 +127,18 @@ int main() {
         switch (choixGraphe) {
             case 1:
                 strcpy(nomFichier, "graphe_1.txt");
+              //  snprintf(fichierDot, sizeof(fichierDot), "cmake-build-debug\\graphe_1.dot");
+               // snprintf(fichierImage, sizeof(fichierImage), "cmake-build-debug\\graphe_1.png");
                 break;
             case 2:
                 strcpy(nomFichier, "graphe2.txt");
+              //  snprintf(fichierDot, sizeof(fichierDot), "graphe_2.dot");
+              //  snprintf(fichierImage, sizeof(fichierImage), "graphe_2.png");
                 break;
             case 3:
                 strcpy(nomFichier, "graphe3.txt");
+              //  snprintf(fichierDot, sizeof(fichierDot), "graphe_3.dot");
+              //  snprintf(fichierImage, sizeof(fichierImage), "graphe_3.png");
                 break;
             default:
                 printf("Choix invalide. Veuillez réessayer.\n");
@@ -189,8 +200,11 @@ int main() {
                     afficherImpact(&impact, noms);
                     break;
                 case 10:
-                   // visualisation_graphique(noms, matrice, ordre);
-                    printf("\n pas encore implemente");
+                    // "C:\Melanie\Informatique\Graphviz\bin\dot.exe" -Tpng "C:\Melanie\Informatique\NEW_tg_projet\cmake-build-debug\graphe_1.dot" -o "C:\Melanie\Informatique\NEW_tg_projet\cmake-build-debug\graphe_1.png"
+                 //   printf("Affichage du graphe en cours...\n");
+                 //   afficherGraphe();
+
+                    system(imagePath);
                     break;
                 case 11:
                    // moteur_simulation_flux(noms, matrice, ordre);
