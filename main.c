@@ -161,22 +161,22 @@ int main() {
 
             switch (choixFonctionnalite) {
                 case 1:
-                    afficher_sommets(noms, ordre);
+                    affichersommets(noms, ordre);
                     break;
                 case 2:
-                    afficher_arcs(noms, matrice, ordre);
+                    afficherarcs(noms, matrice, ordre);
                     break;
                 case 3:
-                    afficher_successeurs(noms, matrice, ordre);
+                    affichersuccesseurs(noms, matrice, ordre);
                     break;
                 case 4:
-                    afficher_predecesseurs(noms, matrice, ordre);
+                    afficherpredecesseurs(noms, matrice, ordre);
                     break;
                 case 5:
-                    trouver_premiers_maillons(noms, matrice, ordre);
+                    trouverpremiersmaillons(noms, matrice, ordre);
                     break;
                 case 6:
-                    trouver_derniers_maillons(noms, matrice, ordre);
+                    trouverderniersmaillons(noms, matrice, ordre);
                     break;
                 case 7:
                     mesurer_centralite_radiale(matrice, ordre, noms);
@@ -228,7 +228,7 @@ int main() {
                     break;
                 case 13:
                     // dependance d'un chemin
-                    trouver_chemins_dependance(noms, matrice, ordre);
+                    trouvercheminsdependance(noms, matrice, ordre);
                     break;
                 case 14:
                     if (est_fortement_connexe(matrice, ordre)) {

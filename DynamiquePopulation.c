@@ -45,7 +45,7 @@ void ModifierPopulation(int populations[], int taille, char NomAnimaux[][20]) {
         }
 
         populations[animal] = Nouvelvaleur;
-        printf("La population de %s a ete mise A jour à %d.\n", NomAnimaux[animal], Nouvelvaleur);
+        printf("La population de %s a ete mise a jour a %d.\n", NomAnimaux[animal], Nouvelvaleur);
     }
 }
 
@@ -68,6 +68,7 @@ void CalculerNouvellePopulation(int populations[], int NouvellePopulation[], dou
 
 // Sous-fonction : Afficher le résumé des populations
 void AfficherPopulation(int PopulationIniniale[], int PopulationModifie[], int PopulationFinale[], int taille, char NomAnimaux[][20]) {
+    printf("\n");
     printf("%-20s %-20s %-20s %-20s\n", "Animal", "Population Initiale", "Population Modifie", "Population Final");
     printf("-----------------------------------------------------------------------------------\n");
     for (int i = 0; i < taille; i++) {
