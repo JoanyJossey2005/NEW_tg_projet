@@ -204,6 +204,7 @@ int main() {
                     for (int i = 0; i < Nb; i++) {
                         PopulationModifie[i] = PopulationIniniale[i];
                     }
+                    AfficherPopulationActuelle(PopulationModifie, NomAnimaux, Nb);
 
                     ModifierPopulation(PopulationModifie, Nb, NomAnimaux);
                     CalculerNouvellePopulation(PopulationModifie, PopulationFinale, coefficients, Nb);

@@ -8,6 +8,14 @@
 
 #define MAXANIMAUX 100
 
+void AfficherPopulationActuelle(int Population[], char NomAnimaux[][20], int taille) {
+    printf("\n=== Population actuelle ===\n");
+    printf("%-20s %-20s\n", "Animal", "Population");
+    printf("--------------------------------------\n");
+    for (int i = 0; i < taille; i++) {
+        printf("%-20s %-20d\n", NomAnimaux[i], Population[i]);
+    }
+}
 
 // Sous-fonction : Modifier les populations
 void ModifierPopulation(int populations[], int taille, char NomAnimaux[][20]) {
@@ -37,7 +45,7 @@ void ModifierPopulation(int populations[], int taille, char NomAnimaux[][20]) {
         }
 
         populations[animal] = Nouvelvaleur;
-        printf("La population de %s a ete mise à jour à %d.\n", NomAnimaux[animal], Nouvelvaleur);
+        printf("La population de %s a ete mise A jour à %d.\n", NomAnimaux[animal], Nouvelvaleur);
     }
 }
 
