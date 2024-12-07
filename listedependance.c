@@ -9,28 +9,30 @@
 
 
 
-void afficher_sommets(char noms[MAX_ANIMAUX][MAX_NOM], int ordre) {
+void affichersommets(char noms[MAXANIMAUX][MAXNOM], int ordre) {
     printf("Nombre de sommet : %d  :\n", ordre);
-    printf("Liste des sommets :\n");
+    printf("\n");
+    printf("**** Liste des sommets : ****\n");
     for (int i = 0; i < ordre; i++) {
         printf("%s\n", noms[i]);
     }
 }
 
-void afficher_arcs(char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre) {
-    int nb_arcs = 0;
+void afficherarcs(char noms[MAXANIMAUX][MAXNOM], int matrice[MAXANIMAUX][MAXANIMAUX], int ordre) {
+    int nbarcs = 0;
 
     // Calcul du nombre d'arcs
     for (int i = 0; i < ordre; i++) {
         for (int j = 0; j < ordre; j++) {
             if (matrice[i][j] == 1) {
-                nb_arcs++;
+                nbarcs++;
             }
         }
     }
 
-    printf("\nNombre des arc %d  :\n", nb_arcs);
-    printf("\nListe des arcs:\n");
+    printf("\nNombre des arc %d  :\n", nbarcs);
+    printf("\n");
+    printf("\n**** Liste des arcs:****\n");
     for (int i = 0; i < ordre; i++) {
         for (int j = 0; j < ordre; j++) {
             if (matrice[i][j] == 1) {
@@ -40,18 +42,18 @@ void afficher_arcs(char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANIMAUX][MAX
     }
 }
 
-void trouver_chemins_inverse(int sommet, int matrice[MAX_ANIMAUX][MAX_ANIMAUX], char noms[MAX_ANIMAUX][MAX_NOM], int ordre, int chemin[], int niveau,int* compteur) {
+void trouvercheminsinverse(int sommet, int matrice[MAXANIMAUX][MAXANIMAUX], char noms[MAXANIMAUX][MAXNOM], int ordre, int chemin[], int niveau,int* compteur) {
     chemin[niveau] = sommet;
-    int est_source = 1;
+    int estsource = 1;
 
     for (int i = 0; i < ordre; i++) {
         if (matrice[i][sommet] == 1) {
-            est_source = 0;
-            trouver_chemins_inverse(i, matrice, noms, ordre, chemin, niveau + 1,compteur);
+            estsource = 0;
+            trouvercheminsinverse(i, matrice, noms, ordre, chemin, niveau + 1,compteur);
         }
     }
 
-    if (est_source) {
+    if (estsource) {
         (*compteur)++;
         printf("Chemin : ");
         for (int i = niveau; i >= 0; i--) {
@@ -60,15 +62,15 @@ void trouver_chemins_inverse(int sommet, int matrice[MAX_ANIMAUX][MAX_ANIMAUX], 
     }
 }
 
-void trouver_chemins_dependance(char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre) {
-    char sommet_choisi[MAX_NOM];
+void trouvercheminsdependance(char noms[MAXANIMAUX][MAXNOM], int matrice[MAXANIMAUX][MAXANIMAUX], int ordre) {
+    char sommetchoisi[MAXNOM];
     int index = -1;
 
     printf("\nEntrez le nom du sommet : ");
-    scanf("%s", sommet_choisi);
+    scanf("%s", sommetchoisi);
 
     for (int i = 0; i < ordre; i++) {
-        if (strcmp(noms[i], sommet_choisi) == 0) {
+        if (strcmp(noms[i], sommetchoisi) == 0) {
             index = i;
             break;
         }
@@ -79,9 +81,9 @@ void trouver_chemins_dependance(char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX
         return;
     }
 
-    printf("\nTous les chemins aboutissant a %s :\n", sommet_choisi);
-    int chemin[MAX_ANIMAUX];
+    printf("\nTous les chemins aboutissant a %s :\n", sommetchoisi);
+    int chemin[MAXANIMAUX];
     int compteur = 0;
-    trouver_chemins_inverse(index, matrice, noms, ordre, chemin, 0, &compteur);
-    printf("\nNombre total de chemins : %d\n", compteur);
+    trouvercheminsinverse(index, matrice, noms, ordre, chemin, 0, &compteur);
+    printf("\n*   Nombre total de chemins : %d\n", compteur);
 }

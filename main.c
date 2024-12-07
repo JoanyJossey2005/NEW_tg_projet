@@ -7,6 +7,7 @@
 #include "connexite.h"
 #include "centralite.h"
 #include "NivTrophiquesMaxLim.h"
+#include "visualisation_graphes.h"
 #include "dynamique.h"
 
 #define MAX_ANIMAUX 100
@@ -87,6 +88,10 @@ int main() {
     int choixGraphe, choixFonctionnalite;
     int sommetSupprime;
 
+    const char *imagePath = "C:\\Melanie\\Informatique\\NEW_tg_projet\\cmake-build-debug\\graphe_1.png";
+   // const char* fichierDot = "C:\\Melanie\\Informatique\\NEW_tg_projet\\cmake-build-debug\\graphe_1.dot";
+   // const char* fichierImage = "C:\\Melanie\\Informatique\\NEW_tg_projet\\cmake-build-debug\\graphe_1.png";
+
     while (1) {
         afficher_menu_principal();
         printf("Choisissez un graphe a etudier (1, 2 ou 3, ou 0 pour quitter) : ");
@@ -101,12 +106,18 @@ int main() {
         switch (choixGraphe) {
             case 1:
                 strcpy(nomFichier, "graphe_1.txt");
+              //  snprintf(fichierDot, sizeof(fichierDot), "cmake-build-debug\\graphe_1.dot");
+               // snprintf(fichierImage, sizeof(fichierImage), "cmake-build-debug\\graphe_1.png");
                 break;
             case 2:
                 strcpy(nomFichier, "graphe2.txt");
+              //  snprintf(fichierDot, sizeof(fichierDot), "graphe_2.dot");
+              //  snprintf(fichierImage, sizeof(fichierImage), "graphe_2.png");
                 break;
             case 3:
                 strcpy(nomFichier, "graphe3.txt");
+              //  snprintf(fichierDot, sizeof(fichierDot), "graphe_3.dot");
+              //  snprintf(fichierImage, sizeof(fichierImage), "graphe_3.png");
                 break;
             default:
                 printf("Choix invalide. Veuillez réessayer.\n");
@@ -131,44 +142,54 @@ int main() {
 
             switch (choixFonctionnalite) {
                 case 1:
-                    afficher_sommets(noms, ordre);
+                    affichersommets(noms, ordre);
                     break;
                 case 2:
-                    afficher_arcs(noms, matrice, ordre);
+                    afficherarcs(noms, matrice, ordre);
                     break;
                 case 3:
-                    afficher_successeurs(noms, matrice, ordre);
+                    affichersuccesseurs(noms, matrice, ordre);
                     break;
                 case 4:
-                    afficher_predecesseurs(noms, matrice, ordre);
+                    afficherpredecesseurs(noms, matrice, ordre);
                     break;
                 case 5:
-                    trouver_premiers_maillons(noms, matrice, ordre);
+                    trouverpremiersmaillons(noms, matrice, ordre);
                     break;
                 case 6:
-                    trouver_derniers_maillons(noms, matrice, ordre);
+                    trouverderniersmaillons(noms, matrice, ordre);
                     break;
                 case 7:
                     mesurer_centralite_radiale(matrice, ordre, noms);
                     mesurer_centralite_mediane(matrice, ordre, noms);
                     break;
                 case 8:
+                    // Calculer les niveaux trophiques
                     calculer_niveaux_trophiques(matrice, ordre, niveaux);
+                    // Afficher les niveaux trophiques de toutes les espèces
                     afficher_niveaux_trophiques(noms, niveaux, ordre);
+                    // Afficher le niveau trophique maximal
                     afficher_niveau_trophique_maximal(niveaux, ordre);
                     break;
                 case 9:
                     printf("Entrez le numero du sommet a supprimer (0 à %d) : ", ordre - 1);
                     scanf("%d", &sommetSupprime);
+
+                    // Analyser et afficher l'impact
                     Impact impact;
                     analyserImpact(matrice, ordre, sommetSupprime, &impact);
                     afficherImpact(&impact, noms);
                     break;
                 case 10:
-                    printf("\nVisualisation non implementee\n");
+                    // "C:\Melanie\Informatique\Graphviz\bin\dot.exe" -Tpng "C:\Melanie\Informatique\NEW_tg_projet\cmake-build-debug\graphe_1.dot" -o "C:\Melanie\Informatique\NEW_tg_projet\cmake-build-debug\graphe_1.png"
+                 //   printf("Affichage du graphe en cours...\n");
+                 //   afficherGraphe();
+
+                    system(imagePath);
                     break;
                 case 11:
-                    printf("\nSimulation de flux non implementee\n");
+                   // moteur_simulation_flux(noms, matrice, ordre);
+                    printf("\n pas encore implemente");
                     break;
                 case 12:
                     printf("\n=== Simulation Dynamique en Temps Reel ===\n");
@@ -185,7 +206,7 @@ int main() {
                     break;
                 case 13:
                     // dependance d'un chemin
-                    trouver_chemins_dependance(noms, matrice, ordre);
+                    trouvercheminsdependance(noms, matrice, ordre);
                     break;
                 case 14:
                     if (est_fortement_connexe(matrice, ordre)) {

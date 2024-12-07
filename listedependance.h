@@ -5,12 +5,12 @@
 #ifndef PROJET_INFO_TG_LISTEDEPENDANCE_H
 #define PROJET_INFO_TG_LISTEDEPENDANCE_H
 
-#define MAX_ANIMAUX 100
-#define MAX_NOM 50
+#define MAXANIMAUX 100
+#define MAXNOM 50
 
-void trouver_chemins_inverse(int sommet, int matrice[MAX_ANIMAUX][MAX_ANIMAUX], char noms[MAX_ANIMAUX][MAX_NOM], int ordre, int chemin[], int niveau,int* compteur);
+void trouvercheminsinverse(int sommet, int matrice[MAXANIMAUX][MAXANIMAUX], char noms[MAXANIMAUX][MAXNOM], int ordre, int chemin[], int niveau,int* compteur);
 
-void trouver_chemins_dependance(char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre);
-void afficher_arcs(char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre);
-void afficher_sommets(char noms[MAX_ANIMAUX][MAX_NOM], int ordre);
-#endif //PROJET_INFO_TG_LISTEDEPENDANCE_H
+void trouvercheminsdependance(char noms[MAXANIMAUX][MAXNOM], int matrice[MAXANIMAUX][MAXANIMAUX], int ordre);
+void afficherarcs(char noms[MAXANIMAUX][MAXNOM], int matrice[MAXANIMAUX][MAXANIMAUX], int ordre);
+void affichersommets(char noms[MAXANIMAUX][MAXNOM], int ordre);
+#endif //PROJETINFOTGLISTEDEPENDANCEH

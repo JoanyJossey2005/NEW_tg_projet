@@ -4,24 +4,27 @@
 #include <string.h>
 #include "Affichagegeneral.h"
 
-#define MAX_ANIMAUX 100
-#define MAX_NOM 50
+#define MAXANIMAUX 100
+#define MAXNOM 50
 
 // Fonction pour afficher les successeurs de chaque animal
-void afficher_successeurs(char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre) {
+void affichersuccesseurs(char noms[MAXANIMAUX][MAXNOM], int matrice[MAXANIMAUX][MAXANIMAUX], int ordre) {
+    printf("--------------------------------\n");
     printf("\nAffichage des successeurs :\n");
+    printf("--------------------------------\n");
+
     for (int i = 0; i < ordre; i++) {
         printf("Successeurs de %s : ", noms[i]);
-        int successeur_existe = 0;
+        int successeurexiste = 0;
 
         for (int j = 0; j < ordre; j++) {
             if (matrice[i][j] == 1) {
                 printf("%s ", noms[j]);
-                successeur_existe = 1;
+                successeurexiste = 1;
             }
         }
 
-        if (!successeur_existe) {
+        if (!successeurexiste) {
             printf("Aucun");
         }
         printf("\n");
@@ -29,20 +32,22 @@ void afficher_successeurs(char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANIMA
 }
 
 // Fonction pour afficher les prédécesseurs de chaque animal
-void afficher_predecesseurs(char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre) {
+void afficherpredecesseurs(char noms[MAXANIMAUX][MAXNOM], int matrice[MAXANIMAUX][MAXANIMAUX], int ordre) {
+    printf("--------------------------------\n");
     printf("\nAffichage des predecesseurs :\n");
+    printf("--------------------------------\n");
     for (int i = 0; i < ordre; i++) {
         printf("Predecesseurs de %s : ", noms[i]);
-        int predecesseur_existe = 0;
+        int predecesseurexiste = 0;
 
         for (int j = 0; j < ordre; j++) {
             if (matrice[j][i] == 1) {
                 printf("%s ", noms[j]);
-                predecesseur_existe = 1;
+                predecesseurexiste = 1;
             }
         }
 
-        if (!predecesseur_existe) {
+        if (!predecesseurexiste) {
             printf("Aucun");
         }
         printf("\n");
@@ -50,34 +55,34 @@ void afficher_predecesseurs(char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANI
 }
 
 // Fonction pour trouver les premiers maillons (sans prédécesseurs)
-void trouver_premiers_maillons(char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre) {
-    printf("\nPremiers maillons (sans predecesseurs) :\n");
+void trouverpremiersmaillons(char noms[MAXANIMAUX][MAXNOM], int matrice[MAXANIMAUX][MAXANIMAUX], int ordre) {
+    printf("\n-  Premiers maillons (sans predecesseurs) :\n");
     for (int i = 0; i < ordre; i++) {
-        int sans_predecesseur = 1;
+        int sanspredecesseur = 1;
         for (int j = 0; j < ordre; j++) {
             if (matrice[j][i] == 1) {
-                sans_predecesseur = 0;
+                sanspredecesseur = 0;
                 break;
             }
         }
-        if (sans_predecesseur) {
+        if (sanspredecesseur) {
             printf("%s\n", noms[i]);
         }
     }
 }
 
 // Fonction pour trouver les derniers maillons (sans successeurs)
-void trouver_derniers_maillons(char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre) {
-    printf("\nDerniers maillons (sans successeurs) :\n");
+void trouverderniersmaillons(char noms[MAXANIMAUX][MAXNOM], int matrice[MAXANIMAUX][MAXANIMAUX], int ordre) {
+    printf("\n-  Derniers maillons (sans successeurs) :\n");
     for (int i = 0; i < ordre; i++) {
-        int sans_successeur = 1;
+        int sanssuccesseur = 1;
         for (int j = 0; j < ordre; j++) {
             if (matrice[i][j] == 1) {
-                sans_successeur = 0;
+                sanssuccesseur = 0;
                 break;
             }
         }
-        if (sans_successeur) {
+        if (sanssuccesseur) {
             printf("%s\n", noms[i]);
         }
     }
