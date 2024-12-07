@@ -7,6 +7,7 @@
 #include "connexite.h"
 #include "centralite.h"
 #include "NivTrophiquesMaxLim.h"
+#include "DynamiquePopulation.h"
 
 #define MAX_ANIMAUX 100
 #define MAX_NOM 50
@@ -66,7 +67,26 @@ void lire_fichier(char* nomFichier, char noms[MAX_ANIMAUX][MAX_NOM], int matrice
 
     fclose(fichier);
 }
+void LireFichierDynamique(const char *nomFichier, int *Nb, int PopulationIniniale[], double coefficients[][MAXANIMAUX], char NomAnimaux[][20]) {
+    FILE *fichier = fopen(nomFichier, "r");
+    if (!fichier) {
+        printf("Erreur : Impossible d'ouvrir le fichier %s\n", nomFichier);
+        exit(1);
+    }
 
+    fscanf(fichier, "%d", Nb);
+    for (int i = 0; i < *Nb; i++) {
+        fscanf(fichier, "%s %d", NomAnimaux[i], &PopulationIniniale[i]);
+    }
+
+    for (int i = 0; i < *Nb; i++) {
+        for (int j = 0; j < *Nb; j++) {
+            fscanf(fichier, "%lf", &coefficients[i][j]);
+        }
+    }
+
+    fclose(fichier);
+}
 // Charger le graphe depuis un fichier
 void charger_graphe(char* nomFichier, char noms[MAX_ANIMAUX][MAX_NOM], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int* ordre) {
     lire_fichier(nomFichier, noms, matrice, ordre);
@@ -80,6 +100,13 @@ int main() {
     int ordre = 0;
     int choixGraphe, choixFonctionnalite;
     int sommetSupprime;
+
+    int Nb;
+    int PopulationIniniale[MAX_ANIMAUX];
+    int PopulationModifie[MAX_ANIMAUX];
+    int PopulationFinale[MAX_ANIMAUX];
+    double coefficients[MAX_ANIMAUX][MAX_ANIMAUX];
+    char NomAnimaux[MAX_ANIMAUX][20];
 
     while (1) {
         afficher_menu_principal();
@@ -170,8 +197,19 @@ int main() {
                     printf("\n pas encore implemente");
                     break;
                 case 12:
-                   // evolution_dynamique_population(noms, matrice, ordre);
-                    printf("\n pas encore implemente");
+
+                    LireFichierDynamique("dynamique.txt", &Nb, PopulationIniniale, coefficients, NomAnimaux);
+
+                    // Initialiser PopulationModifie avec les valeurs initiales
+                    for (int i = 0; i < Nb; i++) {
+                        PopulationModifie[i] = PopulationIniniale[i];
+                    }
+
+                    ModifierPopulation(PopulationModifie, Nb, NomAnimaux);
+                    CalculerNouvellePopulation(PopulationModifie, PopulationFinale, coefficients, Nb);
+                    AfficherPopulation(PopulationIniniale, PopulationModifie, PopulationFinale, Nb, NomAnimaux);
+
+                    system("pause"); // Pause pour éviter la fermeture automatique
                     break;
                 case 13:
                     // dependance d'un chemin
