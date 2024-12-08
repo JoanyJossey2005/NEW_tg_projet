@@ -155,6 +155,7 @@ int main() {
                     break;
                 case 4:
                     afficherpredecesseurs(noms, matrice, ordre);
+                    unesourcedalimentation(noms,matrice, ordre);
                     break;
                 case 5:
                     trouverpremiersmaillons(noms, matrice, ordre);

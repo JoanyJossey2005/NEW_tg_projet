@@ -53,6 +53,23 @@ void afficherpredecesseurs(char noms[MAXANIMAUX][MAXNOM], int matrice[MAXANIMAUX
         printf("\n");
     }
 }
+void unesourcedalimentation(char noms[MAXANIMAUX][MAXNOM], int matrice[MAXANIMAUX][MAXANIMAUX], int ordre) {
+    printf("\nEspeces ayant une seule source d'alimentation :\n");
+
+    for (int i = 0; i < ordre; i++) {
+        int nombrepredecesseurs = 0;
+
+        for (int j = 0; j < ordre; j++) {
+            if (matrice[j][i] == 1) {
+                nombrepredecesseurs++;
+            }
+        }
+
+        if (nombrepredecesseurs == 1) {
+            printf("%s\n", noms[i]);
+        }
+    }
+}
 
 // Fonction pour trouver les premiers maillons (sans prédécesseurs)
 void trouverpremiersmaillons(char noms[MAXANIMAUX][MAXNOM], int matrice[MAXANIMAUX][MAXANIMAUX], int ordre) {
