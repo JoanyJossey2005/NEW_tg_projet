@@ -88,7 +88,7 @@ int main() {
     int choixGraphe, choixFonctionnalite;
     int sommetSupprime;
 
-    const char *imagePath = "C:\\Melanie\\Informatique\\NEW_tg_projet\\cmake-build-debug\\graphe_1.png";
+   // const char *imagePath = "C:\\Melanie\\Informatique\\NEW_tg_projet\\cmake-build-debug\\graphe_1.png";
    // const char* fichierDot = "C:\\Melanie\\Informatique\\NEW_tg_projet\\cmake-build-debug\\graphe_1.dot";
    // const char* fichierImage = "C:\\Melanie\\Informatique\\NEW_tg_projet\\cmake-build-debug\\graphe_1.png";
 
@@ -183,9 +183,9 @@ int main() {
                 case 10:
                     // "C:\Melanie\Informatique\Graphviz\bin\dot.exe" -Tpng "C:\Melanie\Informatique\NEW_tg_projet\cmake-build-debug\graphe_1.dot" -o "C:\Melanie\Informatique\NEW_tg_projet\cmake-build-debug\graphe_1.png"
                  //   printf("Affichage du graphe en cours...\n");
-                 //   afficherGraphe();
+                    afficherGraphe();
 
-                    system(imagePath);
+                  //  system(imagePath);
                     break;
                 case 11:
                    // moteur_simulation_flux(noms, matrice, ordre);

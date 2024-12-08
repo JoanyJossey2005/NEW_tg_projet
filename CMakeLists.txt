@@ -17,5 +17,7 @@ add_executable(projet_info_TG main.c
         NivTrophiquesMaxLim.c
         NivTrophiquesMaxLim.h
         dynamique.c
-        dynamique.h)
+        dynamique.h
+        visualisation_graphes.h
+        visualisation_graphes.c)
 
