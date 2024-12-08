@@ -82,9 +82,9 @@ int main() {
 
     int niveaux[MAX_ANIMAUX];
 
-    float populations[MAX_ANIMAUX];  // Déclaration des populations
-    float r[MAX_ANIMAUX];            // Déclaration des taux de croissance
-    float K[MAX_ANIMAUX];            // Déclaration des capacités de charge
+    float populations[MAX_ANIMAUX];  //déclaration des populations
+    float r[MAX_ANIMAUX];            // déclaration des taux de croissance
+    float K[MAX_ANIMAUX];            //déclaration des capacités de charge
 
     int sommetSupprime;
 

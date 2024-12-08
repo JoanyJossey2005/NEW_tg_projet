@@ -5,7 +5,7 @@
 
 #define MAX_ANIMAUX 100
 
-// Fonction auxiliaire : Parcours en profondeur
+//parcours en profondeur
 void parcours_profondeur(int sommet, int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre, bool visite[]) {
     visite[sommet] = true;
 
@@ -17,11 +17,11 @@ void parcours_profondeur(int sommet, int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int 
 }
 
 void afficher_ecosystemes(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre, char noms[MAX_ANIMAUX][50]) {
-    static bool deja_affiche = false; // Pour éviter l'affichage multiple
+    static bool deja_affiche = false; //pour éviter l'affichage multiple
 
     if (deja_affiche) {
         printf("\n");
-        return; // Ne rien faire si déjà affiché
+        return; //ne rien faire si déjà affiché
     }
     deja_affiche = true;
 
@@ -30,7 +30,7 @@ void afficher_ecosystemes(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre, char
     int deuxieme_graphe[MAX_ANIMAUX];
     int taille_premier = 0, taille_deuxieme = 0;
 
-    // Parcours du premier sous-graphe connexe
+    //parcours du premier sous-graphe connexe
     parcours_profondeur(0, matrice, ordre, visite);
     for (int i = 0; i < ordre; i++) {
         if (visite[i]) {
@@ -38,12 +38,12 @@ void afficher_ecosystemes(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre, char
         }
     }
 
-    // Identification des sommets restants pour le deuxième sous-graphe
+    //identification des sommets restants pour le deuxième sous-graphe
     bool visite_deuxieme[MAX_ANIMAUX] = {false};
     for (int i = 0; i < ordre; i++) {
         if (!visite[i] && !visite_deuxieme[i]) {
             parcours_profondeur(i, matrice, ordre, visite_deuxieme);
-            break; // Une seule recherche de sous-graphe distinct
+            break; //une seule recherche de sous-graphe distinct
         }
     }
 
@@ -69,23 +69,23 @@ void afficher_ecosystemes(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre, char
     printf("\n");
 }
 
-// Vérifier si le graphe est fortement connexe
+//vérifier si le graphe est fortement connexe
 bool est_fortement_connexe(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre) {
     bool visite[MAX_ANIMAUX];
 
-    // Vérifier la connexité en partant de chaque sommet
+    //vérifier la connexité en partant de chaque sommet
     for (int sommet = 0; sommet < ordre; sommet++) {
         memset(visite, false, sizeof(visite));
         parcours_profondeur(sommet, matrice, ordre, visite);
 
         for (int i = 0; i < ordre; i++) {
             if (!visite[i]) {
-                return false; // Pas fortement connexe
+                return false; //pas fortement connexe
             }
         }
     }
 
-    // Transposer la matrice d'adjacence
+    //transposer la matrice d'adjacence
     int matrice_transposee[MAX_ANIMAUX][MAX_ANIMAUX];
     for (int i = 0; i < ordre; i++) {
         for (int j = 0; j < ordre; j++) {
@@ -93,23 +93,23 @@ bool est_fortement_connexe(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre) {
         }
     }
 
-    // Vérifier la connexité sur le graphe transposé
+    //vérifier la connexité sur le graphe transposé
     for (int sommet = 0; sommet < ordre; sommet++) {
         memset(visite, false, sizeof(visite));
         parcours_profondeur(sommet, matrice_transposee, ordre, visite);
 
         for (int i = 0; i < ordre; i++) {
             if (!visite[i]) {
-                return false; // Pas fortement connexe
+                return false; //pas fortement connexe
             }
         }
     }
 
-    return true; // Fortement connexe
+    return true; //fortement connexe
 }
 
 bool est_connexe(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre, char noms[MAX_ANIMAUX][50]) {
-    // Construire une matrice non orientée à partir de la matrice orientée
+    //construire une matrice non orientée à partir de la matrice orientée
     int matrice_non_orientee[MAX_ANIMAUX][MAX_ANIMAUX];
     for (int i = 0; i < ordre; i++) {
         for (int j = 0; j < ordre; j++) {
@@ -117,17 +117,17 @@ bool est_connexe(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre, char noms[MAX
         }
     }
 
-    // Vérifier la connexité du graphe non orienté
+    //vérifier la connexité du graphe
     bool visite[MAX_ANIMAUX] = {false};
     parcours_profondeur(0, matrice_non_orientee, ordre, visite);
 
     for (int i = 0; i < ordre; i++) {
         if (!visite[i]) {
-            // Si non connexe, afficher les écosystèmes distincts UNE SEULE FOIS
+            //si non connexe, afficher les écosystèmes distincts
             afficher_ecosystemes(matrice_non_orientee, ordre, noms);
             return false;
         }
     }
 
-    return true; // Faiblement connexe
+    return true; // pas connexe
 }

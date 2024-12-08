@@ -8,7 +8,7 @@
 
 
 
-// trouver le chemin le plus court entre deux sommet
+//trouver le chemin le plus court entre deux sommet
 void Chemincourt(int matrice[MAXANIMAUX][MAXANIMAUX], int nombreSommets, int chemins[MAXANIMAUX][MAXANIMAUX]) {
 
     for (int i = 0; i < nombreSommets; i++) {
@@ -36,7 +36,7 @@ void Chemincourt(int matrice[MAXANIMAUX][MAXANIMAUX], int nombreSommets, int che
 }
 
 
-// calculer la centralité d'intermédiarité
+//calculer la centralité d'intermédiarité
 void calculerCentralite(int matrice[MAXANIMAUX][MAXANIMAUX], int nombreSommets, float centralite[MAXANIMAUX]) {
     int chemins[MAXANIMAUX][MAXANIMAUX];
     Chemincourt(matrice, nombreSommets, chemins);
@@ -68,7 +68,7 @@ void calculerCentralite(int matrice[MAXANIMAUX][MAXANIMAUX], int nombreSommets, 
     }
 }
 
-// Fonction pour calculer la centralité radiale
+//fonction pour calculer la centralité radiale
 void mesurercentraliteradiale(int matrice[MAXANIMAUX][MAXANIMAUX], int ordre, char noms[MAXANIMAUX][MAXNOM]) {
     int demidegreinterieur[MAXANIMAUX] = {0};
     int demidegreexterieur[MAXANIMAUX] = {0};
@@ -83,7 +83,7 @@ void mesurercentraliteradiale(int matrice[MAXANIMAUX][MAXANIMAUX], int ordre, ch
         }
     }
 
-    // Affichage des résultats
+    //affichage des résultats
     printf("\n=== Centralite Radiale ===\n");
     for (int i = 0; i < ordre; i++) {
         printf("%s : Demi-degre interieur = %d, Demi-degre exterieur = %d\n",
@@ -91,14 +91,14 @@ void mesurercentraliteradiale(int matrice[MAXANIMAUX][MAXANIMAUX], int ordre, ch
     }
 }
 
-// la centralité médiane
+//la centralité médiane
 void mesurercentralitemediane(int matrice[MAXANIMAUX][MAXANIMAUX], int ordre, char noms[MAXANIMAUX][MAXNOM]) {
     float centraliteintermediaire[MAXANIMAUX] = {0};
 
 
     calculerCentralite(matrice, ordre, centraliteintermediaire);
 
-    // Affichage des résultats
+    //Affichage des résultats
     printf("\n=== Centralite Mediane ===\n");
     for (int i = 0; i < ordre; i++) {
         printf("%s : Centralite d'intermediarite = %.2f\n", noms[i], centraliteintermediaire[i]);

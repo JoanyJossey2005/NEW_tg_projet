@@ -9,13 +9,13 @@
 
 #define MAX_ANIMAUX 100
 
-// Fonction pour effectuer un parcours en profondeur
+//fonction pour effectuer un parcours en profondeur
 void parcours_profondeur(int sommet, int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre, bool visite[]);
 
-// Vérifier si le graphe est fortement connexe
+//vérifier si le graphe est fortement connexe
 bool est_fortement_connexe(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre);
 
-// Vérifier si le graphe est faiblement connexe
+//vérifier si le graphe est connexe
 bool est_connexe(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre, char noms[MAX_ANIMAUX][50]);
 
 // Afficher les deux sous-graphes (écosystèmes) distincts si le graphe n'est pas connexe
