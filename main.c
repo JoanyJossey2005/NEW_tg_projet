@@ -202,7 +202,7 @@ int main() {
                         calculer_population(ordre, populations, r, K, matrice);
                     }
 
-                    afficher_graphique(historique, noms, ordre, steps);
+                    //afficher_graphique(historique, noms, ordre, steps);
                     break;
                 case 12:
                     printf("\n=== Simulation Dynamique en Temps Reel ===\n");

@@ -3,55 +3,55 @@
 #include <string.h>
 #include "NivTrophiquesMaxLim.h"
 
-#define MAX_ANIMAUX 100
-
-// Calculer les niveaux trophiques pour chaque espèce
+// Fonction pour calculer les niveaux trophiques
 void calculer_niveaux_trophiques(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre, int niveaux[MAX_ANIMAUX]) {
-    // Initialiser les niveaux trophiques à -1 (inconnu)
+    // Initialiser tous les niveaux à -1 (non définis)
     for (int i = 0; i < ordre; i++) {
         niveaux[i] = -1;
     }
 
-    // Le niveau trophique des producteurs (niveau 1) est 0, donc toutes les espèces de niveau 1 commencent ici
+    // Définir les producteurs primaires (aucun prédécesseur)
     for (int i = 0; i < ordre; i++) {
-        int is_producer = 1;  // On suppose que l'espèce i est un producteur (niveau 1)
+        int est_producteur = 1;
         for (int j = 0; j < ordre; j++) {
-            if (matrice[j][i] == 1) {
-                // Si l'espèce i est mangée par une autre espèce j, alors ce n'est pas un producteur
-                is_producer = 0;
+            if (matrice[j][i] == 1) { // Si une espèce prédate i
+                est_producteur = 0;
                 break;
             }
         }
-        if (is_producer) {
-            niveaux[i] = 1;  // Le niveau trophique des producteurs est défini à 1
+        if (est_producteur) {
+            niveaux[i] = 1; // Producteur au niveau trophique 1
         }
     }
 
-    // Propager les niveaux trophiques pour les autres espèces
-    int niveau;
-    int changed;
+    // Propagation des niveaux trophiques
+    int changements;
     do {
-        changed = 0;  // Variable pour vérifier si des niveaux trophiques ont changé
+        changements = 0;
         for (int i = 0; i < ordre; i++) {
-            // Si le niveau trophique de l'espèce i est déjà défini, on continue
-            if (niveaux[i] != -1) continue;
+            if (niveaux[i] != -1) continue; // Si déjà calculé
 
-            // Chercher les prédateurs de l'espèce i (espèces qui peuvent la manger)
+            int max_niveau_predateur = 0;
+            int pred_found = 0;
+
             for (int j = 0; j < ordre; j++) {
-                if (matrice[j][i] == 1 && niveaux[j] != -1) {
-                    // L'espèce j mange l'espèce i et son niveau trophique est déjà connu
-                    niveau = niveaux[j] + 1;
-                    if (niveaux[i] == -1 || niveaux[i] < niveau) {
-                        niveaux[i] = niveau;
-                        changed = 1;  // Un niveau trophique a été modifié
+                if (matrice[j][i] == 1 && niveaux[j] != -1) { // j prédécesseur de i
+                    pred_found = 1;
+                    if (niveaux[j] > max_niveau_predateur) {
+                        max_niveau_predateur = niveaux[j];
                     }
                 }
             }
+
+            if (pred_found) {
+                niveaux[i] = max_niveau_predateur + 1;
+                changements = 1;
+            }
         }
-    } while (changed);  // Répéter jusqu'à ce qu'aucun niveau trophique ne change
+    } while (changements);
 }
 
-// Afficher les niveaux trophiques de toutes les espèces
+// Fonction pour afficher les niveaux trophiques
 void afficher_niveaux_trophiques(char noms[MAX_ANIMAUX][MAX_NOM], int niveaux[MAX_ANIMAUX], int ordre) {
     printf("\n--- Niveaux trophiques ---\n");
     for (int i = 0; i < ordre; i++) {
@@ -59,7 +59,7 @@ void afficher_niveaux_trophiques(char noms[MAX_ANIMAUX][MAX_NOM], int niveaux[MA
     }
 }
 
-// Afficher le niveau trophique maximal
+// Fonction pour afficher le niveau trophique maximal
 void afficher_niveau_trophique_maximal(int niveaux[MAX_ANIMAUX], int ordre) {
     int niveau_max = 0;
     for (int i = 0; i < ordre; i++) {
@@ -67,6 +67,5 @@ void afficher_niveau_trophique_maximal(int niveaux[MAX_ANIMAUX], int ordre) {
             niveau_max = niveaux[i];
         }
     }
-    printf("\nLe niveau trophique maximal dans le reseau est : %d\n", niveau_max);
+    printf("\nLe niveau trophique maximal dans le réseau est : %d\n", niveau_max);
 }
-
