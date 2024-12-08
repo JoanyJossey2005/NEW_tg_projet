@@ -7,7 +7,7 @@
 #include "connexite.h"
 #include "centralite.h"
 #include "NivTrophiquesMaxLim.h"
-#include "visualisation_graphes.h"
+//#include "visualisation_graphes.h"
 #include "dynamique.h"
 
 #define MAX_ANIMAUX 100
@@ -110,12 +110,12 @@ int main() {
                // snprintf(fichierImage, sizeof(fichierImage), "cmake-build-debug\\graphe_1.png");
                 break;
             case 2:
-                strcpy(nomFichier, "graphe2.txt");
+                strcpy(nomFichier, "graphe_2.txt");
               //  snprintf(fichierDot, sizeof(fichierDot), "graphe_2.dot");
               //  snprintf(fichierImage, sizeof(fichierImage), "graphe_2.png");
                 break;
             case 3:
-                strcpy(nomFichier, "graphe3.txt");
+                strcpy(nomFichier, "graphe_3.txt");
               //  snprintf(fichierDot, sizeof(fichierDot), "graphe_3.dot");
               //  snprintf(fichierImage, sizeof(fichierImage), "graphe_3.png");
                 break;
@@ -183,7 +183,7 @@ int main() {
                 case 10:
                     // "C:\Melanie\Informatique\Graphviz\bin\dot.exe" -Tpng "C:\Melanie\Informatique\NEW_tg_projet\cmake-build-debug\graphe_1.dot" -o "C:\Melanie\Informatique\NEW_tg_projet\cmake-build-debug\graphe_1.png"
                  //   printf("Affichage du graphe en cours...\n");
-                    afficherGraphe();
+                    //afficherGraphe();
 
                   //  system(imagePath);
                     break;
@@ -211,12 +211,13 @@ int main() {
                 case 14:
                     if (est_fortement_connexe(matrice, ordre)) {
                         printf("Le graphe est fortement connexe.\n");
-                    } else if (est_connexe(matrice, ordre)) {
+                    } else if (est_connexe(matrice, ordre, noms)) {
                         printf("Le graphe est connexe.\n");
                     } else {
-                        printf("Le graphe n'est pas connexe.\n");
+                        afficher_ecosystemes(matrice, ordre, noms);
                     }
                     break;
+
 
                 default:
                     printf("Choix invalide. Veuillez reessayer.\n");
