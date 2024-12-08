@@ -106,9 +106,9 @@ void lancer_simulation(int ordre, float* populations, float* r, float* K, int ma
     }
 }
 
-// Fonction pour afficher les graphiques avec gnuplot
+// Fonction pour afficher les graphiques avec gnuplot (logiciel installé en plus)
 void afficher_graphique(float populations[MAX_ANIMAUX][MAX_ANIMAUX], char noms[MAX_ANIMAUX][MAX_NOM], int ordre, int steps) {
-    FILE* gnuplotPipe = popen("C:\\gnuplot\\bin\\gnuplot.exe -persistent", "w");
+    FILE* gnuplotPipe = popen("C:\\gnuplot\\bin\\gnuplot.exe -persistent", "w"); // ouverture du logiciel
     if (!gnuplotPipe) {
         perror("Erreur lors de l'ouverture de gnuplot");
         exit(EXIT_FAILURE);
@@ -131,7 +131,7 @@ void afficher_graphique(float populations[MAX_ANIMAUX][MAX_ANIMAUX], char noms[M
     }
     fclose(dataFile);
 
-    // Préparer la commande gnuplot
+    // Titres du graphique à générer
     fprintf(gnuplotPipe, "set title 'Evolution des populations'\n");
     fprintf(gnuplotPipe, "set xlabel 'Temps'\n");
     fprintf(gnuplotPipe, "set ylabel 'Population'\n");
@@ -145,6 +145,6 @@ void afficher_graphique(float populations[MAX_ANIMAUX][MAX_ANIMAUX], char noms[M
     }
     fprintf(gnuplotPipe, "\n");
 
-    fflush(gnuplotPipe);
+    fflush(gnuplotPipe); // vider le tampon d'entrée
     pclose(gnuplotPipe);
 }

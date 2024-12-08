@@ -5,8 +5,8 @@
 #ifndef GRAPHE_H
 #define GRAPHE_H
 
-#define MAX_ANIMAUX 100  // Nombre maximum de sommets (animaux)
-#define MAX_NOM 50       // Longueur maximale du nom d'un sommet
+#define MAX_ANIMAUX 100
+#define MAX_NOM 50     // Longueur maximale du nom d'un sommet
 
 typedef struct {
     int sommetSupprime;
@@ -16,7 +16,6 @@ typedef struct {
     int indicesPredateurs[MAX_ANIMAUX];
 } Impact;
 
-// Déclaration des fonctions
 void analyserImpact(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre, int sommetSupprime, Impact* impact);
 void afficherImpact(Impact* impact, char noms[MAX_ANIMAUX][MAX_NOM]);
 
