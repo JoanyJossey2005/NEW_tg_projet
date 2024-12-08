@@ -5,14 +5,14 @@
 #ifndef PROJET_INFO_TG_CENTRALITE_H
 #define PROJET_INFO_TG_CENTRALITE_H
 
-#define MAX_NOM 50
-#define MAX_ANIMAUX 100
+#define MAXNOM 50
+#define MAXANIMAUX 100
 
-// Fonction pour calculer la centralité radiale
-void mesurer_centralite_radiale(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre, char noms[MAX_ANIMAUX][MAX_NOM]);
-
-// Fonction pour calculer la centralité médiane
-void mesurer_centralite_mediane(int matrice[MAX_ANIMAUX][MAX_ANIMAUX], int ordre, char noms[MAX_ANIMAUX][MAX_NOM]);
+// Prototype des fonctions
+void Chemincourt(int matrice[MAXANIMAUX][MAXANIMAUX], int nombreSommets, int chemins[MAXANIMAUX][MAXANIMAUX]);
+void calculerCentralite(int matrice[MAXANIMAUX][MAXANIMAUX], int nombreSommets, float centralite[MAXANIMAUX]);
+void mesurercentraliteradiale(int matrice[MAXANIMAUX][MAXANIMAUX], int ordre, char noms[MAXANIMAUX][MAXNOM]);
+void mesurercentralitemediane(int matrice[MAXANIMAUX][MAXANIMAUX], int ordre, char noms[MAXANIMAUX][MAXNOM]);
 
 
 #endif //PROJET_INFO_TG_CENTRALITE_H

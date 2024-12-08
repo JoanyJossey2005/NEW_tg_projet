@@ -163,8 +163,8 @@ int main() {
                     trouverderniersmaillons(noms, matrice, ordre);
                     break;
                 case 7:
-                    mesurer_centralite_radiale(matrice, ordre, noms);
-                    mesurer_centralite_mediane(matrice, ordre, noms);
+                    mesurercentraliteradiale(matrice, ordre, noms);
+                    mesurercentralitemediane(matrice, ordre, noms);
                     break;
                 case 8:
                     // Calculer les niveaux trophiques
