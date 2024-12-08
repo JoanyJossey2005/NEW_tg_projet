@@ -106,3 +106,45 @@ void lancer_simulation(int ordre, float* populations, float* r, float* K, int ma
     }
 }
 
+// Fonction pour afficher les graphiques avec gnuplot
+void afficher_graphique(float populations[MAX_ANIMAUX][MAX_ANIMAUX], char noms[MAX_ANIMAUX][MAX_NOM], int ordre, int steps) {
+    FILE* gnuplotPipe = popen("C:\\gnuplot\\bin\\gnuplot.exe -persistent", "w");
+    if (!gnuplotPipe) {
+        perror("Erreur lors de l'ouverture de gnuplot");
+        exit(EXIT_FAILURE);
+    }
+
+    // Préparer le fichier temporaire contenant les données
+    FILE* dataFile = fopen("populations.dat", "w");
+    if (!dataFile) {
+        perror("Erreur lors de la création du fichier temporaire");
+        exit(EXIT_FAILURE);
+    }
+
+    // Écrire les données pour gnuplot
+    for (int step = 0; step < steps; step++) {
+        fprintf(dataFile, "%d", step); // Temps
+        for (int i = 0; i < ordre; i++) {
+            fprintf(dataFile, " %.2f", populations[step][i]); // Population de chaque espèce
+        }
+        fprintf(dataFile, "\n");
+    }
+    fclose(dataFile);
+
+    // Préparer la commande gnuplot
+    fprintf(gnuplotPipe, "set title 'Evolution des populations'\n");
+    fprintf(gnuplotPipe, "set xlabel 'Temps'\n");
+    fprintf(gnuplotPipe, "set ylabel 'Population'\n");
+    fprintf(gnuplotPipe, "plot ");
+
+    for (int i = 0; i < ordre; i++) {
+        fprintf(gnuplotPipe, "'populations.dat' using 1:%d with lines title '%s'", i + 2, noms[i]);
+        if (i < ordre - 1) {
+            fprintf(gnuplotPipe, ", ");
+        }
+    }
+    fprintf(gnuplotPipe, "\n");
+
+    fflush(gnuplotPipe);
+    pclose(gnuplotPipe);
+}

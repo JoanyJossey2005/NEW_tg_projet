@@ -20,6 +20,8 @@ void afficher_populations(float populations[], char noms[MAX_ANIMAUX][MAX_NOM], 
 void lancer_simulation(int ordre, float populations[], float r[], float K[], int matrice[MAX_ANIMAUX][MAX_ANIMAUX], char noms[MAX_ANIMAUX][MAX_NOM]);
 
 
+void afficher_graphique(float populations[MAX_ANIMAUX][MAX_ANIMAUX], char noms[MAX_ANIMAUX][MAX_NOM], int ordre, int steps);
+
 #endif
 
 
