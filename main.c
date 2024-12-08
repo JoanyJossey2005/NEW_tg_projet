@@ -7,7 +7,7 @@
 #include "connexite.h"
 #include "centralite.h"
 #include "NivTrophiquesMaxLim.h"
-//#include "visualisation_graphes.h"
+#include "visualisation_graphes.h"
 #include "dynamique.h"
 
 #define MAX_ANIMAUX 100
@@ -88,6 +88,9 @@ int main() {
     int choixGraphe, choixFonctionnalite;
     int sommetSupprime;
 
+    int steps = 100; // Nombre de pas de temps
+    float historique[MAX_ANIMAUX][steps];
+
    // const char *imagePath = "C:\\Melanie\\Informatique\\NEW_tg_projet\\cmake-build-debug\\graphe_1.png";
    // const char* fichierDot = "C:\\Melanie\\Informatique\\NEW_tg_projet\\cmake-build-debug\\graphe_1.dot";
    // const char* fichierImage = "C:\\Melanie\\Informatique\\NEW_tg_projet\\cmake-build-debug\\graphe_1.png";
@@ -125,7 +128,7 @@ int main() {
         }
 
         charger_graphe(nomFichier, noms, populations, matrice, &ordre);
-        printf("Graphe %d chargé avec succès.\n", choixGraphe);
+        printf("Graphe %d charge avec succes.\n", choixGraphe);
 
         initialiser_parametres_dynamiques(r, K, ordre, noms);
 
@@ -183,13 +186,23 @@ int main() {
                 case 10:
                     // "C:\Melanie\Informatique\Graphviz\bin\dot.exe" -Tpng "C:\Melanie\Informatique\NEW_tg_projet\cmake-build-debug\graphe_1.dot" -o "C:\Melanie\Informatique\NEW_tg_projet\cmake-build-debug\graphe_1.png"
                  //   printf("Affichage du graphe en cours...\n");
-                    //afficherGraphe();
+                    afficherGraphe(choixGraphe);
 
                   //  system(imagePath);
                     break;
                 case 11:
                    // moteur_simulation_flux(noms, matrice, ordre);
-                    printf("\n pas encore implemente");
+                    //printf("\n pas encore implemente");
+                    // Afficher le graphique
+
+                    for (int step = 0; step < steps; step++) {
+                        for (int i = 0; i < ordre; i++) {
+                            historique[i][step] = populations[i];
+                        }
+                        calculer_population(ordre, populations, r, K, matrice);
+                    }
+
+                    afficher_graphique(historique, noms, ordre, steps);
                     break;
                 case 12:
                     printf("\n=== Simulation Dynamique en Temps Reel ===\n");
@@ -217,7 +230,6 @@ int main() {
                         afficher_ecosystemes(matrice, ordre, noms);
                     }
                     break;
-
 
                 default:
                     printf("Choix invalide. Veuillez reessayer.\n");

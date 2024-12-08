@@ -5,6 +5,6 @@
 #ifndef PROJET_INFO_TG_VISUALISATION_GRAPHES_H
 #define PROJET_INFO_TG_VISUALISATION_GRAPHES_H
 
-void afficherGraphe();
+void afficherGraphe(int choixGraphe);
 
 #endif //PROJET_INFO_TG_VISUALISATION_GRAPHES_H
